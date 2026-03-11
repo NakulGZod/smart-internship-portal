@@ -1,0 +1,61 @@
+.role-container{
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background: linear-gradient(135deg,#0f172a,#1e293b);
+}
+
+.role-card{
+  background:white;
+  padding:50px;
+  border-radius:12px;
+  text-align:center;
+  width:380px;
+  box-shadow:0 10px 25px rgba(0,0,0,0.2);
+}
+
+.title{
+  font-size:28px;
+  font-weight:700;
+  margin-bottom:10px;
+}
+
+.subtitle{
+  color:#6b7280;
+  margin-bottom:30px;
+}
+
+.role-buttons{
+  display:flex;
+  flex-direction:column;
+  gap:15px;
+}
+
+.admin-btn{
+  padding:12px;
+  border:none;
+  background:#2563eb;
+  color:white;
+  font-size:16px;
+  border-radius:8px;
+  cursor:pointer;
+}
+
+.admin-btn:hover{
+  background:#1d4ed8;
+}
+
+.candidate-btn{
+  padding:12px;
+  border:none;
+  background:#10b981;
+  color:white;
+  font-size:16px;
+  border-radius:8px;
+  cursor:pointer;
+}
+
+.candidate-btn:hover{
+  background:#059669;
+}

@@ -52,7 +52,7 @@ export default function Home() {
     }
   ];
 
-  // If admin internships exist → show them, else show default ones
+  // If admin internships exist → merge them
   const displayedInternships =
     internships.length > 0
       ? [...defaultInternships, ...internships]
@@ -127,10 +127,15 @@ export default function Home() {
 
           <InternshipCard
             key={internship.id}
+            id={internship.id}
             title={internship.title}
             company={internship.company}
             location={internship.location}
-            stipend={internship.stipend}
+            stipend={
+              typeof internship.stipend === "number"
+                ? `₹${internship.stipend}/month`
+                : internship.stipend
+            }
           />
 
         ))}

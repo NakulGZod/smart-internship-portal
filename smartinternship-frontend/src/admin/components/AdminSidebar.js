@@ -19,7 +19,7 @@ export default function AdminSidebar() {
         </Link>
 
         <Link
-          to="/admin/applications"
+         to="/admin/AdminApplications"
           className="block px-3 py-2 rounded-lg hover:bg-[#1e293b] hover:text-white transition"
         >
           Applications

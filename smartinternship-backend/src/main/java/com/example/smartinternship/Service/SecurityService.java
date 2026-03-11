@@ -13,29 +13,39 @@ import com.example.smartinternship.Repository.SecurityRepository;
 @Service
 public class SecurityService {
 
-	@Autowired
-	private SecurityRepository securityrepo;
-	
-	@Autowired
-	private AuthenticationManager authenticationManager;
     @Autowired
-	private PasswordEncoder passwordEncoder;
+    private SecurityRepository securityrepo;
+
+    @Autowired
+    private AuthenticationManager authenticationManager;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @Autowired
     private JWTService jwtService;
-    
-	public void signup(Users user) {
-		user.setPassword(passwordEncoder.encode(user.getPassword()));
-		securityrepo.save(user);
-	}
 
-	public String signin(Users user) {
-		 Authentication auth=authenticationManager.authenticate(
-				 new UsernamePasswordAuthenticationToken(
-				user.getEmail(),
-				user.getPassword()));
-		 
-			   return  jwtService.generateToken(user.getEmail());
-	
-	}
+    public void signup(Users user) {
 
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+
+        securityrepo.save(user);
+    }
+
+    public String signin(Users user) {
+
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                        user.getEmail(),
+                        user.getPassword()
+                )
+        );
+
+        if (authentication.isAuthenticated()) {
+
+            return jwtService.generateToken(user.getEmail());
+        }
+
+        throw new RuntimeException("Invalid email or password");
+    }
 }
