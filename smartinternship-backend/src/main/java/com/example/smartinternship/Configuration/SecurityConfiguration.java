@@ -38,15 +38,12 @@ public class SecurityConfiguration {
         return new BCryptPasswordEncoder();
     }
 
-    // ✅ FIX: Allow ALL Vercel URLs + localhost
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOriginPatterns(List.of(
             "http://localhost:3000",
-            "https://*.vercel.app",
-            "https://smart-internship-portal-silk.vercel.app",
-            "https://smart-internshipportal.vercel.app"
+            "https://*.vercel.app"
         ));
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("*"));
@@ -67,7 +64,7 @@ public class SecurityConfiguration {
                 .requestMatchers("/signin", "/signup").permitAll()
                 .requestMatchers("/internships/**").permitAll()
                 .requestMatchers("/applications/**").permitAll()
-                .requestMatchers("/admin/dashboard/**").permitAll()
+                .requestMatchers("/admin/**").permitAll() // ✅ covers all admin routes
                 .anyRequest().authenticated()
             )
             .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
